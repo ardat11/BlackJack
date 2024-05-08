@@ -28,7 +28,7 @@ public class VisualUpdater : MonoBehaviour
 
     public void NumberUpdater()
     {  
-        if(Deck.aceCountUs > 0)
+        if(Deck.aceCountUs > 0 && OpeningPhase.instance.gameon)
         {
             OurText.text = (Deck.ourside-10).ToString() +  "/" + Deck.ourside.ToString();
         }
@@ -36,7 +36,7 @@ public class VisualUpdater : MonoBehaviour
         {
             OurText.text = Deck.ourside.ToString();
         }
-        if (Deck.aceCountDealer > 0)
+        if (Deck.aceCountDealer > 0 && OpeningPhase.instance.gameon)
         {
             DealerText.text = (Deck.dealerside - 10).ToString() + "/" + Deck.dealerside.ToString();
         }

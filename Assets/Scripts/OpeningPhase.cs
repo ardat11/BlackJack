@@ -22,6 +22,8 @@ public class OpeningPhase : MonoBehaviour
 
     public void Overlimitcheck()
     {
+        gameon = false;
+        VisualUpdater.Instance.NumberUpdater(); // ace çekildiyse slashlarý kaldýrýr.
         Destroy(Deck.hiddencard); // Ð
         Deck.hiddencard = Deck.kartDestesi[Deck.hidingcard];
         Instantiate(Deck.hiddencard, new Vector3(Deck.Dealer.position.x + 6 * Deck.dealerdiff, Deck.Dealer.position.y, Deck.Dealer.position.z), Deck.Dealer.rotation);
@@ -56,26 +58,26 @@ public class OpeningPhase : MonoBehaviour
             print("OYUNCU KAZANDI");
             CountMoneyManager.Instance.WinUp();
             VisualUpdater.Instance.ScoreboardUpdate();
-            gameon = false;
+            
         }
         else if( Deck.dealerside > Deck.ourside)
         {
             print("KASA KAZANDI");
             CountMoneyManager.Instance.LoseUp();
             VisualUpdater.Instance.ScoreboardUpdate();
-            gameon = false;
+            
         }
         else if (Deck.dealerside < Deck.ourside)
         {
             print("OYUNCU KAZANDI");
             CountMoneyManager.Instance.WinUp();
             VisualUpdater.Instance.ScoreboardUpdate();
-            gameon = false;
+           
         }
         else
         {
             print("BERABERE");
-            gameon = false;
+           
         }
     }
 
