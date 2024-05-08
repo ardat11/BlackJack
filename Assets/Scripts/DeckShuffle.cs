@@ -23,6 +23,8 @@ public class DeckShuffle : MonoBehaviour
     public int ourside;
     private int deal = 4;
     public int hidingcard;
+    public int aceCountDealer;
+    public int aceCountUs;
 
     public int ourdiff = 1;
     public int dealerdiff = 1;
@@ -59,13 +61,15 @@ public class DeckShuffle : MonoBehaviour
             if(deal ==4)
             {
                 GameObject newcard = Instantiate(kartDestesi[takingcard], US.position, US.rotation);
+                AceCheckerUs();
                 ourside += kartpuanlari[takingcard]; //bizim 1. kart
                 kartDestesi[takingcard] = null;
                 VisualUpdater.Instance.NumberUpdater();
             }
             else if (deal ==3)
-            {
+            {   
                 GameObject newcard = Instantiate(kartDestesi[takingcard], Dealer.position, Dealer.rotation);
+                AceCheckerDealer();
                 dealerside += kartpuanlari[takingcard]; // kurpiyer 1. kart
                 kartDestesi[takingcard] = null;
                 VisualUpdater.Instance.NumberUpdater();
@@ -73,7 +77,9 @@ public class DeckShuffle : MonoBehaviour
             else if(deal ==2)
             {
                 GameObject newcard = Instantiate(kartDestesi[takingcard], new Vector3(US.position.x+ 6*ourdiff,US.position.y,US.position.z), US.rotation);
+                AceCheckerUs();
                 ourside += kartpuanlari[takingcard]; // bizim 2.kart
+                AceValueSwitchUs();
                 ourdiff++;
                 kartDestesi[takingcard] = null;
                 VisualUpdater.Instance.NumberUpdater();
@@ -107,43 +113,82 @@ public class DeckShuffle : MonoBehaviour
         ourdiff++;
     }
 
-    public void AceControlnAddtoUs()
-    {
-        if (kartpuanlari[takingcard] == 11) 
-        {
-            if(ourside+11 > 21)
-            {
-                ourside++;
-            }
-            else
-            {
-                ourside += kartpuanlari[takingcard];
-            }
-        }
-        else
-        {
-            ourside += kartpuanlari[takingcard];
-        }
-    }
 
-    public void AceControlnAddtoDealer()
+
+
+
+
+
+    public void AceCheckerDealer()
     {
         if (kartpuanlari[takingcard] == 11)
         {
-            if (dealerside + 11 > 21)
-            {
-                dealerside++;
-            }
-            else
-            {
-                dealerside += kartpuanlari[takingcard];
-            }
-        }
-        else
-        {
-            dealerside += kartpuanlari[takingcard];
+            aceCountDealer++;
         }
     }
+
+    public void AceCheckerUs()
+    {
+        if (kartpuanlari[takingcard] == 11)
+        {
+            aceCountUs++;
+        }
+    }
+
+    public void AceValueSwitchDealer()
+    {
+        if(dealerside > 21 && aceCountDealer > 0)
+        {
+            dealerside -= 10;
+            aceCountDealer--;
+        }
+    }
+
+    public void AceValueSwitchUs()
+    {
+        if (ourside > 21 && aceCountUs > 0)
+        {
+            ourside -= 10;
+            aceCountUs--;
+        }
+    }
+    //public void AceControlnAddtoUs()
+    //{
+    //    if (kartpuanlari[takingcard] == 11) 
+    //    {
+    //        if(ourside+11 > 21)
+    //        {
+    //            ourside++;
+    //        }
+    //        else
+    //        {
+    //            ourside += kartpuanlari[takingcard];
+    //        }
+    //    }
+    //    else
+    //    {
+    //        ourside += kartpuanlari[takingcard];
+    //    }
+    //}
+
+    //public void AceControlnAddtoDealer()
+    //{
+    //    if (kartpuanlari[takingcard] == 11)
+    //    {
+    //        if (dealerside + 11 > 21)
+    //        {
+    //            dealerside++;
+    //        }
+    //        else
+    //        {
+    //            dealerside += kartpuanlari[takingcard];
+    //        }
+    //    }
+    //    else
+    //    {
+    //        dealerside += kartpuanlari[takingcard];
+    //    }
+    //}
 
 
 }

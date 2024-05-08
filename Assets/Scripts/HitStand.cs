@@ -15,8 +15,9 @@ public class HitStand : MonoBehaviour
             {
                 Deck.takingcard = Random.Range(0, Deck.kartDestesi.Length - 1);
             }
-
+            Deck.AceCheckerUs();
             Deck.ourside += Deck.kartpuanlari[Deck.takingcard];
+            Deck.AceValueSwitchUs();
             GameObject newcard = Instantiate(Deck.kartDestesi[Deck.takingcard], new Vector3(Deck.US.position.x + Deck.ourdiff * 6, Deck.US.position.y, Deck.US.position.z), Deck.US.rotation);
             Deck.ourdiff++;
             Deck.kartDestesi[Deck.takingcard] = null;

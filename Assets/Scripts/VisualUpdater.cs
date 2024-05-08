@@ -27,9 +27,24 @@ public class VisualUpdater : MonoBehaviour
 
 
     public void NumberUpdater()
-    {
-        DealerText.text = Deck.dealerside.ToString();
-        OurText.text = Deck.ourside.ToString();
+    {  
+        if(Deck.aceCountUs > 0)
+        {
+            OurText.text = (Deck.ourside-10).ToString() +  "/" + Deck.ourside.ToString();
+        }
+        else
+        {
+            OurText.text = Deck.ourside.ToString();
+        }
+        if (Deck.aceCountDealer > 0)
+        {
+            DealerText.text = (Deck.dealerside - 10).ToString() + "/" + Deck.dealerside.ToString();
+        }
+        else
+        {
+            DealerText.text = Deck.dealerside.ToString();
+        }
+        
     }
 
     public void ScoreboardUpdate()

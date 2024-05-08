@@ -26,7 +26,12 @@ public class OpeningPhase : MonoBehaviour
         Deck.hiddencard = Deck.kartDestesi[Deck.hidingcard];
         Instantiate(Deck.hiddencard, new Vector3(Deck.Dealer.position.x + 6 * Deck.dealerdiff, Deck.Dealer.position.y, Deck.Dealer.position.z), Deck.Dealer.rotation);
         Deck.dealerdiff++;
+        if (Deck.kartpuanlari[Deck.hidingcard] == 11) //AceCheckerDealer for hidingcard
+        {
+            Deck.aceCountDealer++;
+        }
         Deck.dealerside += Deck.kartpuanlari[Deck.hidingcard];
+        Deck.AceValueSwitchDealer();
         VisualUpdater.Instance.NumberUpdater();
 
 
@@ -38,8 +43,9 @@ public class OpeningPhase : MonoBehaviour
             {
                 Deck.takingcard = Random.Range(0, Deck.kartDestesi.Length - 1);
             }
-
+            Deck.AceCheckerDealer();
             Deck.dealerside += Deck.kartpuanlari[Deck.takingcard];
+            Deck.AceValueSwitchDealer();
             GameObject newcard = Instantiate(Deck.kartDestesi[Deck.takingcard], new Vector3(Deck.Dealer.position.x + Deck.dealerdiff * 6, Deck.Dealer.position.y, Deck.Dealer.position.z), Deck.Dealer.rotation);
             Deck.dealerdiff++;
             Deck.kartDestesi[Deck.takingcard] = null;
