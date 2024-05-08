@@ -30,18 +30,18 @@ public class DeckShuffle : MonoBehaviour
     public GameObject hiddencard;
     void Start()
     {
-        
-        //Shuffle();
+
+        Invoke("Shuffle", 0.1f);
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.Escape))
-        {
-            Shuffle();
-        }
-    }
+    //private void Update()
+    //{
+    //    if (Input.GetKeyUp(KeyCode.Escape))
+    //    {
+    //        Shuffle();
+    //    }
+    //}
 
 
 
@@ -61,13 +61,14 @@ public class DeckShuffle : MonoBehaviour
                 GameObject newcard = Instantiate(kartDestesi[takingcard], US.position, US.rotation);
                 ourside += kartpuanlari[takingcard]; //bizim 1. kart
                 kartDestesi[takingcard] = null;
-
+                VisualUpdater.Instance.NumberUpdater();
             }
             else if (deal ==3)
             {
                 GameObject newcard = Instantiate(kartDestesi[takingcard], Dealer.position, Dealer.rotation);
                 dealerside += kartpuanlari[takingcard]; // kurpiyer 1. kart
                 kartDestesi[takingcard] = null;
+                VisualUpdater.Instance.NumberUpdater();
             }
             else if(deal ==2)
             {
@@ -75,6 +76,7 @@ public class DeckShuffle : MonoBehaviour
                 ourside += kartpuanlari[takingcard]; // bizim 2.kart
                 ourdiff++;
                 kartDestesi[takingcard] = null;
+                VisualUpdater.Instance.NumberUpdater();
             }
             if(deal ==1)
             {
@@ -103,6 +105,44 @@ public class DeckShuffle : MonoBehaviour
         ourside += kartpuanlari[takingcard];
         GameObject newcard = Instantiate(kartDestesi[takingcard], new Vector3(US.position.x + ourdiff*6, US.position.y, US.position.z), US.rotation);
         ourdiff++;
+    }
+
+    public void AceControlnAddtoUs()
+    {
+        if (kartpuanlari[takingcard] == 11) 
+        {
+            if(ourside+11 > 21)
+            {
+                ourside++;
+            }
+            else
+            {
+                ourside += kartpuanlari[takingcard];
+            }
+        }
+        else
+        {
+            ourside += kartpuanlari[takingcard];
+        }
+    }
+
+    public void AceControlnAddtoDealer()
+    {
+        if (kartpuanlari[takingcard] == 11)
+        {
+            if (dealerside + 11 > 21)
+            {
+                dealerside++;
+            }
+            else
+            {
+                dealerside += kartpuanlari[takingcard];
+            }
+        }
+        else
+        {
+            dealerside += kartpuanlari[takingcard];
+        }
     }
 
 
