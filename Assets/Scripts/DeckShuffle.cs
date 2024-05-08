@@ -31,9 +31,9 @@ public class DeckShuffle : MonoBehaviour
 
     public GameObject hiddencard;
     void Start()
-    {
-
-        Invoke("Shuffle", 0.1f);
+    {   
+        BetPanelManager.Instance.MoneyVisualUpdate();
+        //Invoke("Shuffle", 0.1f);
 
     }
 

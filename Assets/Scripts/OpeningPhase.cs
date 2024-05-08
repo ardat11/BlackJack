@@ -5,7 +5,7 @@ using UnityEngine;
 public class OpeningPhase : MonoBehaviour
 {
     public static OpeningPhase instance;
-    public bool gameon = true;
+    public bool gameon = false;
 
     [SerializeField] private DeckShuffle Deck;
     private void Awake()
@@ -58,6 +58,7 @@ public class OpeningPhase : MonoBehaviour
             print("OYUNCU KAZANDI");
             CountMoneyManager.Instance.WinUp();
             VisualUpdater.Instance.ScoreboardUpdate();
+            BetPanelManager.Instance.PaybabaPay();
             
         }
         else if( Deck.dealerside > Deck.ourside)
@@ -65,6 +66,7 @@ public class OpeningPhase : MonoBehaviour
             print("KASA KAZANDI");
             CountMoneyManager.Instance.LoseUp();
             VisualUpdater.Instance.ScoreboardUpdate();
+            BetPanelManager.Instance.Fail();
             
         }
         else if (Deck.dealerside < Deck.ourside)
@@ -72,11 +74,13 @@ public class OpeningPhase : MonoBehaviour
             print("OYUNCU KAZANDI");
             CountMoneyManager.Instance.WinUp();
             VisualUpdater.Instance.ScoreboardUpdate();
+            BetPanelManager.Instance.PaybabaPay();
            
         }
         else
         {
             print("BERABERE");
+            BetPanelManager.Instance.Push();
            
         }
     }

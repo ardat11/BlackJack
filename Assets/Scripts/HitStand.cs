@@ -29,6 +29,7 @@ public class HitStand : MonoBehaviour
                 CountMoneyManager.Instance.LoseUp();
                 VisualUpdater.Instance.ScoreboardUpdate();
                 OpeningPhase.instance.gameon = false;
+                BetPanelManager.Instance.Fail();
 
             }
         }
